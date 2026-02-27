@@ -132,38 +132,38 @@ defmodule Intro do
   # PHASE 3: Higher-Order Functions
   # =============================================
 
-  # Exercise 13: my_reduce/3
+  # Exercise 13: reduce/3
   # Reduce a list to a single value using a function and an initial accumulator.
-  # HINT: Base case: my_reduce([], acc, _fun) — return the accumulator.
+  # HINT: Base case: reduce([], acc, _fun) — return the accumulator.
   # HINT: Recursive case: apply the function to head and acc, then recurse with tail.
   # HINT: Anonymous functions are called with a dot: fun.(arg1, arg2)
   #
-  #   my_reduce([1, 2, 3], 0, fn x, acc -> x + acc end) => 6
-  #   my_reduce([], 42, fn _, acc -> acc end)            => 42
+  #   reduce([1, 2, 3], 0, fn x, acc -> x + acc end) => 6
+  #   reduce([], 42, fn _, acc -> acc end)            => 42
 
-  # Exercise 14: my_map/2
+  # Exercise 14: map/2
   # Transform each element in a list using a function.
-  # HINT: Build this using your my_reduce/3 function!
+  # HINT: Build this using your reduce/3 function!
   # HINT: The accumulator is a list. Prepend with [fun.(x) | acc].
   # HINT: You'll need to reverse the result — use your reverse/1!
   #
-  #   my_map([1, 2, 3], fn x -> x * 2 end) => [2, 4, 6]
-  #   my_map([], fn x -> x end)             => []
+  #   map([1, 2, 3], fn x -> x * 2 end) => [2, 4, 6]
+  #   map([], fn x -> x end)             => []
 
-  # Exercise 15: my_filter/2
+  # Exercise 15: filter/2
   # Keep only elements where the function returns true.
-  # HINT: Build this using your my_reduce/3 function!
+  # HINT: Build this using your reduce/3 function!
   # HINT: Use an if expression: if fun.(x), do: [x | acc], else: acc
   # HINT: Reverse the result at the end.
   #
-  #   my_filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) => [2, 4]
-  #   my_filter([1, 2, 3], fn _ -> false end)               => []
+  #   filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) => [2, 4]
+  #   filter([1, 2, 3], fn _ -> false end)               => []
 
   # Exercise 16: quicksort/1
   # Sort a list using the quicksort algorithm.
   # HINT: Base case: an empty list is already sorted.
   # HINT: Pick the first element as the pivot: [pivot | rest]
-  # HINT: Use your my_filter/2 to split into lesser and greater.
+  # HINT: Use your filter/2 to split into lesser and greater.
   # HINT: Concatenate with ++: quicksort(lesser) ++ [pivot] ++ quicksort(greater)
   #
   #   quicksort([])                        => []

@@ -51,9 +51,9 @@ You should see 2 tests passing. The remaining exercises are commented out in
 
 ### Phase 3: Higher-Order Functions
 
-13. **my_reduce/3** — The fundamental fold
-14. **my_map/2** — Transform elements (built on reduce)
-15. **my_filter/2** — Select elements (built on reduce)
+13. **reduce/3** — The fundamental fold
+14. **map/2** — Transform elements (built on reduce)
+15. **filter/2** — Select elements (built on reduce)
 16. **quicksort/1** — Sort a list (capstone!)
 
 ## Viewing Slides
@@ -66,8 +66,4 @@ This opens a browser with the presentation slides.
 
 ## Solutions
 
-Switch to the `solutions` branch to see all implementations:
-
-```bash
-git checkout solutions
-```
+Solutions for each exercise are shown in the slides.

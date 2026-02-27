@@ -491,22 +491,22 @@ Anonymous functions use `fn -> end` and are called with `.()`.
 
 ---
 
-## Exercise 13: my_reduce/3
+## Exercise 13: reduce/3
 
 Reduce a list to a single value using a function.
 
 ```elixir
-my_reduce([1, 2, 3], 0, fn x, acc -> x + acc end)  # => 6
+reduce([1, 2, 3], 0, fn x, acc -> x + acc end)  # => 6
 ```
 
 ---
 
-## SOLUTION: my_reduce
+## SOLUTION: reduce
 
 ```elixir
-def my_reduce([], acc, _fun), do: acc
-def my_reduce([head | tail], acc, fun) do
-  my_reduce(tail, fun.(head, acc), fun)
+def reduce([], acc, _fun), do: acc
+def reduce([head | tail], acc, fun) do
+  reduce(tail, fun.(head, acc), fun)
 end
 ```
 
@@ -515,30 +515,30 @@ end
 ## How it works
 
 ```elixir
-my_reduce([1, 2, 3], 0, fn x, acc -> x + acc end)
-# => my_reduce([2, 3], 1, fun)   # fun.(1, 0) = 1
-# => my_reduce([3], 3, fun)      # fun.(2, 1) = 3
-# => my_reduce([], 6, fun)       # fun.(3, 3) = 6
+reduce([1, 2, 3], 0, fn x, acc -> x + acc end)
+# => reduce([2, 3], 1, fun)   # fun.(1, 0) = 1
+# => reduce([3], 3, fun)      # fun.(2, 1) = 3
+# => reduce([], 6, fun)       # fun.(3, 3) = 6
 # => 6
 ```
 
 ---
 
-## Exercise 14: my_map/2
+## Exercise 14: map/2
 
-Transform every element. Build it using my_reduce!
+Transform every element. Build it using reduce!
 
 ```elixir
-my_map([1, 2, 3], fn x -> x * 2 end)  # => [2, 4, 6]
+map([1, 2, 3], fn x -> x * 2 end)  # => [2, 4, 6]
 ```
 
 ---
 
-## SOLUTION: my_map
+## SOLUTION: map
 
 ```elixir
-def my_map(list, fun) do
-  my_reduce(list, [], fn x, acc -> [fun.(x) | acc] end)
+def map(list, fun) do
+  reduce(list, [], fn x, acc -> [fun.(x) | acc] end)
   |> reverse()
 end
 ```
@@ -547,21 +547,21 @@ The `|>` pipe operator passes the result of the left side as the first argument 
 
 ---
 
-## Exercise 15: my_filter/2
+## Exercise 15: filter/2
 
-Keep only matching elements. Build it using my_reduce!
+Keep only matching elements. Build it using reduce!
 
 ```elixir
-my_filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end)  # => [2, 4]
+filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end)  # => [2, 4]
 ```
 
 ---
 
-## SOLUTION: my_filter
+## SOLUTION: filter
 
 ```elixir
-def my_filter(list, fun) do
-  my_reduce(list, [], fn x, acc ->
+def filter(list, fun) do
+  reduce(list, [], fn x, acc ->
     if fun.(x), do: [x | acc], else: acc
   end)
   |> reverse()
@@ -575,8 +575,8 @@ end
 ```elixir
 def quicksort([]), do: []
 def quicksort([pivot | rest]) do
-  lesser  = my_filter(rest, fn x -> x <= pivot end)
-  greater = my_filter(rest, fn x -> x > pivot end)
+  lesser  = filter(rest, fn x -> x <= pivot end)
+  greater = filter(rest, fn x -> x > pivot end)
   quicksort(lesser) ++ [pivot] ++ quicksort(greater)
 end
 ```
@@ -592,7 +592,7 @@ quicksort([8, 2, 5, 3, 1, 9, 0, 6])
 # => [0, 1, 2, 3, 5, 6, 8, 9]
 ```
 
-HINT: Use `my_filter` to partition and `++` to concatenate.
+HINT: Use `filter` to partition and `++` to concatenate.
 
 ---
 

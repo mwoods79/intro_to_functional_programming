@@ -91,19 +91,19 @@ defmodule IntroTest do
   # Phase 3: Higher-Order Functions
   # =============================================
 
-  # test "my_reduce" do
-  #   assert my_reduce([1, 2, 3], 0, fn x, acc -> x + acc end) == 6
-  #   assert my_reduce([], 42, fn _, acc -> acc end) == 42
+  # test "reduce" do
+  #   assert reduce([1, 2, 3], 0, fn x, acc -> x + acc end) == 6
+  #   assert reduce([], 42, fn _, acc -> acc end) == 42
   # end
 
-  # test "my_map" do
-  #   assert my_map([1, 2, 3], fn x -> x * 2 end) == [2, 4, 6]
-  #   assert my_map([], fn x -> x end) == []
+  # test "map" do
+  #   assert map([1, 2, 3], fn x -> x * 2 end) == [2, 4, 6]
+  #   assert map([], fn x -> x end) == []
   # end
 
-  # test "my_filter" do
-  #   assert my_filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) == [2, 4]
-  #   assert my_filter([1, 2, 3], fn _ -> false end) == []
+  # test "filter" do
+  #   assert filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) == [2, 4]
+  #   assert filter([1, 2, 3], fn _ -> false end) == []
   # end
 
   # test "quicksort" do
