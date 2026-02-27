@@ -10,10 +10,8 @@ paginate: true
 
 ## Why Elixir?
 
-- Runs on the Erlang VM (BEAM)
-- Functional, immutable, concurrent
-- Everything is an expression
 - Pattern matching is a core language feature
+- Tail call optimization — recursion without blowing the stack
 
 ---
 
