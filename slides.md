@@ -126,7 +126,47 @@ Elixir tries clauses top-to-bottom. The `_` wildcard matches anything and discar
 
 ---
 
-## Exercise 4: describe/1
+## Exercise 4: same?/2
+
+Check if two values are the same.
+
+```elixir
+same?(1, 1)       # => true
+same?(:a, :a)     # => true
+same?(1, 2)       # => false
+same?("hi", "ho") # => false
+```
+
+HINT: What happens if you use the same variable name twice?
+
+---
+
+## SOLUTION: same?
+
+```elixir
+def same?(a, a), do: true
+def same?(_, _), do: false
+```
+
+---
+
+## Repeated variables in patterns
+
+When the same variable appears twice, Elixir requires both positions to have **the same value**:
+
+```elixir
+def same?(a, a), do: true   # only matches when both args are equal
+def same?(_, _), do: false  # matches everything else
+```
+
+```elixir
+{a, a} = {1, 1}    # works! a is bound to 1
+{a, a} = {1, 2}    # ** (MatchError) — 1 != 2
+```
+
+---
+
+## Exercise 5: describe/1
 
 Return a string describing the type of value.
 
@@ -165,7 +205,7 @@ Only a limited set of expressions are allowed in guards.
 
 ---
 
-## Exercise 5: first/1
+## Exercise 6: first/1
 
 Return the first element of a list, or `:empty` for `[]`.
 
@@ -203,7 +243,7 @@ This is **the** fundamental pattern for processing lists.
 
 ---
 
-## Exercise 6: shape_area/1
+## Exercise 7: shape_area/1
 
 Calculate the area of a shape given as a tagged tuple.
 
@@ -241,7 +281,7 @@ Pattern matching makes this incredibly powerful.
 
 ---
 
-## Exercise 7: get_info/1
+## Exercise 8: get_info/1
 
 Extract information from a user map.
 
@@ -280,6 +320,7 @@ You can match on maps in function heads. More specific patterns first!
 
 You've now matched on:
 - **Atoms**: `:morning`, `true`, `false`
+- **Repeated variables**: `def same?(a, a)`
 - **Guards**: `when is_integer(x)`
 - **Lists**: `[head | tail]`, `[]`
 - **Tuples**: `{:circle, r}`, `{:rectangle, w, h}`
@@ -302,7 +343,7 @@ Pattern matching defines when to stop and when to keep going.
 
 ---
 
-## Exercise 8: count/1
+## Exercise 9: count/1
 
 Count the elements in a list.
 
@@ -335,7 +376,7 @@ count(["a", "b", "c"])
 
 ---
 
-## Exercise 9: sum/1
+## Exercise 10: sum/1
 
 Sum all numbers in a list.
 
@@ -368,7 +409,7 @@ sum([1, 2, 3])
 
 ---
 
-## Exercise 10: maximum/1
+## Exercise 11: maximum/1
 
 Find the largest value in a list.
 
@@ -402,7 +443,7 @@ maximum([1, 9, 7])
 
 ---
 
-## Exercise 11: reverse/1
+## Exercise 12: reverse/1
 
 Reverse a list. This introduces the **accumulator pattern**.
 
@@ -447,7 +488,7 @@ This is **tail recursion** — the last thing each clause does is call itself.
 
 ---
 
-## Exercise 12: zip/2
+## Exercise 13: zip/2
 
 Combine two lists into a list of tuples.
 
@@ -491,7 +532,7 @@ Anonymous functions use `fn -> end` and are called with `.()`.
 
 ---
 
-## Exercise 13: reduce/3
+## Exercise 14: reduce/3
 
 Reduce a list to a single value using a function.
 
@@ -524,7 +565,7 @@ reduce([1, 2, 3], 0, fn x, acc -> x + acc end)
 
 ---
 
-## Exercise 14: map/2
+## Exercise 15: map/2
 
 Transform every element. Build it using reduce!
 
@@ -547,7 +588,7 @@ The `|>` pipe operator passes the result of the left side as the first argument 
 
 ---
 
-## Exercise 15: filter/2
+## Exercise 16: filter/2
 
 Keep only matching elements. Build it using reduce!
 
@@ -583,7 +624,7 @@ end
 
 ---
 
-## Exercise 16: quicksort/1
+## Exercise 17: quicksort/1
 
 Use everything you've built to sort a list!
 
@@ -596,6 +637,43 @@ HINT: Use `filter` to partition and `++` to concatenate.
 
 ---
 
+## Bonus: merge_sort/1
+
+Another way to sort — split, sort each half, merge.
+
+```elixir
+merge_sort([8, 2, 5, 3, 1, 9, 0, 6])
+# => [0, 1, 2, 3, 5, 6, 8, 9]
+```
+
+HINT: `Enum.split/2` splits a list at a position.
+HINT: Write a private `merge/2` helper for two sorted lists.
+
+---
+
+## SOLUTION: merge_sort
+
+```elixir
+def merge_sort([]), do: []
+def merge_sort([x]), do: [x]
+def merge_sort(list) do
+  mid = div(length(list), 2)
+  {left, right} = Enum.split(list, mid)
+  merge(merge_sort(left), merge_sort(right))
+end
+
+defp merge([], right), do: right
+defp merge(left, []), do: left
+defp merge([lh | lt], [rh | _] = right) when lh <= rh do
+  [lh | merge(lt, right)]
+end
+defp merge(left, [rh | rt]) do
+  [rh | merge(left, rt)]
+end
+```
+
+---
+
 ## What we built today
 
 Starting from just **pattern matching**, we built:
@@ -603,7 +681,7 @@ Starting from just **pattern matching**, we built:
 - Boolean logic, type inspection, data destructuring
 - List traversal, accumulators
 - reduce, map, filter
-- A sorting algorithm
+- Two sorting algorithms
 
 All from **pattern matching** and **recursion**. That's functional programming.
 

@@ -31,6 +31,13 @@ defmodule IntroTest do
   #   assert b_and(false, false) == false
   # end
 
+  # test "same?" do
+  #   assert same?(1, 1) == true
+  #   assert same?(:a, :a) == true
+  #   assert same?(1, 2) == false
+  #   assert same?("hi", "ho") == false
+  # end
+
   # test "describe" do
   #   assert describe(42) == "integer"
   #   assert describe("hello") == "string"
@@ -109,5 +116,15 @@ defmodule IntroTest do
   # test "quicksort" do
   #   assert quicksort([]) == []
   #   assert quicksort([8, 2, 5, 3, 5, 1, 9, 0, 6, 5]) == [0, 1, 2, 3, 5, 5, 5, 6, 8, 9]
+  # end
+
+  # =============================================
+  # Bonus
+  # =============================================
+
+  # test "merge_sort" do
+  #   assert merge_sort([]) == []
+  #   assert merge_sort([1]) == [1]
+  #   assert merge_sort([8, 2, 5, 3, 5, 1, 9, 0, 6, 5]) == [0, 1, 2, 3, 5, 5, 5, 6, 8, 9]
   # end
 end

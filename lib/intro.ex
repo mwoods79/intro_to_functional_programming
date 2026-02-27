@@ -44,7 +44,18 @@ defmodule Intro do
   #   b_and(true, true)  => true
   #   b_and(true, false) => false
 
-  # Exercise 4: describe/1
+  # Exercise 4: same?/2
+  # Check if two values are the same using pattern matching.
+  # HINT: When the same variable name appears twice in a pattern,
+  #       Elixir requires both positions to have the same value.
+  # HINT: Use _ for the catch-all clause.
+  #
+  #   same?(1, 1)       => true
+  #   same?(:a, :a)     => true
+  #   same?(1, 2)       => false
+  #   same?("hi", "ho") => false
+
+  # Exercise 5: describe/1
   # Return a string describing what type of value was passed in.
   # HINT: Use guards with `when` — e.g., def describe(x) when is_integer(x), do: ...
   # HINT: In Elixir, strings are called "binaries" — use is_binary/1 to check for strings.
@@ -54,7 +65,7 @@ defmodule Intro do
   #   describe(:ok)      => "atom"
   #   describe([1, 2])   => "list"
 
-  # Exercise 5: first/1
+  # Exercise 6: first/1
   # Return the first element of a list, or :empty for an empty list.
   # HINT: Lists in Elixir are linked lists. You can destructure them: [head | tail]
   # HINT: You need two clauses — one for [] and one for [head | _tail].
@@ -63,7 +74,7 @@ defmodule Intro do
   #   first([:a, :b])  => :a
   #   first([])         => :empty
 
-  # Exercise 6: shape_area/1
+  # Exercise 7: shape_area/1
   # Calculate the area of a shape given as a tagged tuple.
   # HINT: Pattern match directly on the tuple structure in the function head.
   # HINT: Use :math.pi() for pi.
@@ -72,7 +83,7 @@ defmodule Intro do
   #   shape_area({:rectangle, 4, 6})  => 24
   #   shape_area({:triangle, 3, 8})   => 12.0
 
-  # Exercise 7: get_info/1
+  # Exercise 8: get_info/1
   # Extract information from a user map using pattern matching.
   # HINT: You can match on maps in function heads: %{name: name, role: :admin}
   # HINT: More specific clauses must come first — Elixir tries top-to-bottom.
@@ -85,15 +96,15 @@ defmodule Intro do
   # PHASE 2: Recursion
   # =============================================
 
-  # Exercise 8: count/1
+  # Exercise 9: count/1
   # Count the number of elements in a list.
   # HINT: What is the count of an empty list? (this is your base case)
   # HINT: For [_head | tail], the count is 1 + count(tail).
   #
-  #   count([])          => 0
+  #   count([])              => 0
   #   count(["a", "b", "c"]) => 3
 
-  # Exercise 9: sum/1
+  # Exercise 10: sum/1
   # Sum all numbers in a list.
   # HINT: Very similar structure to count/1.
   # HINT: The sum of an empty list is 0.
@@ -101,7 +112,7 @@ defmodule Intro do
   #   sum([])        => 0
   #   sum([1, 2, 3]) => 6
 
-  # Exercise 10: maximum/1
+  # Exercise 11: maximum/1
   # Find the largest value in a list.
   # HINT: The base case is a single-element list: [x] — just return x.
   # HINT: Use the built-in max/2 function: max(5, 9) => 9
@@ -109,7 +120,7 @@ defmodule Intro do
   #   maximum([5])             => 5
   #   maximum([5, 4, 9, 2, 7]) => 9
 
-  # Exercise 11: reverse/1
+  # Exercise 12: reverse/1
   # Reverse a list using a helper function with an accumulator.
   # HINT: Start with: def reverse(list), do: do_reverse(list, [])
   # HINT: Use defp for the private helper function.
@@ -119,7 +130,7 @@ defmodule Intro do
   #   reverse([])        => []
   #   reverse([1, 2, 3]) => [3, 2, 1]
 
-  # Exercise 12: zip/2
+  # Exercise 13: zip/2
   # Combine two lists into a list of tuples.
   # HINT: There are two base cases — either list being empty returns [].
   # HINT: The recursive case destructures BOTH lists at once.
@@ -132,7 +143,7 @@ defmodule Intro do
   # PHASE 3: Higher-Order Functions
   # =============================================
 
-  # Exercise 13: reduce/3
+  # Exercise 14: reduce/3
   # Reduce a list to a single value using a function and an initial accumulator.
   # HINT: Base case: reduce([], acc, _fun) — return the accumulator.
   # HINT: Recursive case: apply the function to head and acc, then recurse with tail.
@@ -141,7 +152,7 @@ defmodule Intro do
   #   reduce([1, 2, 3], 0, fn x, acc -> x + acc end) => 6
   #   reduce([], 42, fn _, acc -> acc end)            => 42
 
-  # Exercise 14: map/2
+  # Exercise 15: map/2
   # Transform each element in a list using a function.
   # HINT: Build this using your reduce/3 function!
   # HINT: The accumulator is a list. Prepend with [fun.(x) | acc].
@@ -150,7 +161,7 @@ defmodule Intro do
   #   map([1, 2, 3], fn x -> x * 2 end) => [2, 4, 6]
   #   map([], fn x -> x end)             => []
 
-  # Exercise 15: filter/2
+  # Exercise 16: filter/2
   # Keep only elements where the function returns true.
   # HINT: Build this using your reduce/3 function!
   # HINT: Use an if expression: if fun.(x), do: [x | acc], else: acc
@@ -159,7 +170,7 @@ defmodule Intro do
   #   filter([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) => [2, 4]
   #   filter([1, 2, 3], fn _ -> false end)               => []
 
-  # Exercise 16: quicksort/1
+  # Exercise 17: quicksort/1
   # Sort a list using the quicksort algorithm.
   # HINT: Base case: an empty list is already sorted.
   # HINT: Pick the first element as the pivot: [pivot | rest]
@@ -168,4 +179,21 @@ defmodule Intro do
   #
   #   quicksort([])                        => []
   #   quicksort([8, 2, 5, 3, 1, 9, 0, 6]) => [0, 1, 2, 3, 5, 6, 8, 9]
+
+  # =============================================
+  # BONUS
+  # =============================================
+
+  # Bonus: merge_sort/1
+  # Sort a list using the merge sort algorithm.
+  # HINT: Base cases are [] and [x] — already sorted.
+  # HINT: Split the list in half with Enum.split/2:
+  #       Enum.split([1, 2, 3, 4], 2) => {[1, 2], [3, 4]}
+  # HINT: Use div(length(list), 2) to find the midpoint.
+  # HINT: Write a private merge/2 helper that merges two sorted lists.
+  # HINT: merge([], right) => right, merge(left, []) => left
+  # HINT: Compare the heads — take the smaller one and recurse.
+  #
+  #   merge_sort([])                        => []
+  #   merge_sort([8, 2, 5, 3, 1, 9, 0, 6]) => [0, 1, 2, 3, 5, 6, 8, 9]
 end

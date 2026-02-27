@@ -36,25 +36,30 @@ You should see 2 tests passing. The remaining exercises are commented out in
 1. **greet/1** — Match on atoms _(done for you!)_
 2. **b_not/1** — Boolean NOT _(done for you!)_
 3. **b_or/2, b_and/2** — Boolean OR and AND
-4. **describe/1** — Type checking with guards
-5. **first/1** — List destructuring
-6. **shape_area/1** — Tuple pattern matching
-7. **get_info/1** — Map pattern matching
+4. **same?/2** — Repeated variables in patterns
+5. **describe/1** — Type checking with guards
+6. **first/1** — List destructuring
+7. **shape_area/1** — Tuple pattern matching
+8. **get_info/1** — Map pattern matching
 
 ### Phase 2: Recursion
 
-8. **count/1** — Count list elements
-9. **sum/1** — Sum list elements
-10. **maximum/1** — Find the largest element
-11. **reverse/1** — Reverse a list (accumulator pattern)
-12. **zip/2** — Combine two lists
+9. **count/1** — Count list elements
+10. **sum/1** — Sum list elements
+11. **maximum/1** — Find the largest element
+12. **reverse/1** — Reverse a list (accumulator pattern)
+13. **zip/2** — Combine two lists
 
 ### Phase 3: Higher-Order Functions
 
-13. **reduce/3** — The fundamental fold
-14. **map/2** — Transform elements (built on reduce)
-15. **filter/2** — Select elements (built on reduce)
-16. **quicksort/1** — Sort a list (capstone!)
+14. **reduce/3** — The fundamental fold
+15. **map/2** — Transform elements (built on reduce)
+16. **filter/2** — Select elements (built on reduce)
+17. **quicksort/1** — Sort a list (capstone!)
+
+### Bonus
+
+- **merge_sort/1** — Sort a list using divide and conquer
 
 ## Viewing Slides
 
