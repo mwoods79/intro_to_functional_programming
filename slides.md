@@ -40,6 +40,21 @@ Two tests should pass. Your job: make the rest pass!
 
 ---
 
+## Data types we'll use
+
+```elixir
+42              # integer
+3.14            # float
+true            # boolean (just atoms!)
+:hello          # atom — a named constant
+"hello"         # string
+[1, 2, 3]      # list — a linked list
+{:ok, "value"}  # tuple — fixed-size container
+%{name: "José"} # map — key-value pairs
+```
+
+---
+
 ## What is pattern matching?
 
 The `=` in Elixir is the **match operator**, not assignment:
@@ -488,6 +503,22 @@ This is **tail recursion** — the last thing each clause does is call itself.
 
 ---
 
+## Tail call optimization
+
+The BEAM (Erlang VM) optimizes tail calls — when the **last thing** a function does is call itself, it reuses the current stack frame instead of adding a new one.
+
+```elixir
+# tail recursive — uses constant stack space
+defp do_reverse([head | tail], acc), do: do_reverse(tail, [head | acc])
+
+# NOT tail recursive — must hold the stack to add 1 after the call returns
+def count([_head | tail]), do: 1 + count(tail)
+```
+
+This means tail-recursive functions can handle lists of any size without overflowing the stack.
+
+---
+
 ## Exercise 13: zip/2
 
 Combine two lists into a list of tuples.
@@ -695,3 +726,195 @@ All from **pattern matching** and **recursion**. That's functional programming.
 - OTP and GenServer
 
 Thank you!
+
+---
+
+## Bonus: all?/2
+
+Do all elements satisfy the predicate?
+
+```elixir
+all?([2, 4, 6], fn x -> rem(x, 2) == 0 end)  # => true
+all?([2, 3, 6], fn x -> rem(x, 2) == 0 end)  # => false
+```
+
+HINT: Reduce with `true` as the initial accumulator.
+
+---
+
+## SOLUTION: all?
+
+```elixir
+def all?(list, fun) do
+  reduce(list, true, fn x, acc -> acc and fun.(x) end)
+end
+```
+
+---
+
+## Bonus: any?/2
+
+Does any element satisfy the predicate?
+
+```elixir
+any?([1, 3, 5], fn x -> rem(x, 2) == 0 end)  # => false
+any?([1, 2, 5], fn x -> rem(x, 2) == 0 end)  # => true
+```
+
+HINT: Reduce with `false` as the initial accumulator.
+
+---
+
+## SOLUTION: any?
+
+```elixir
+def any?(list, fun) do
+  reduce(list, false, fn x, acc -> acc or fun.(x) end)
+end
+```
+
+---
+
+## Bonus: reject/2
+
+The opposite of filter — keep elements where the function returns false.
+
+```elixir
+reject([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end)  # => [1, 3]
+```
+
+---
+
+## SOLUTION: reject
+
+```elixir
+def reject(list, fun) do
+  filter(list, fn x -> not fun.(x) end)
+end
+```
+
+Or build it directly with reduce — your choice!
+
+---
+
+## Bonus: find/2
+
+Return the first element matching a predicate, or nil.
+
+```elixir
+find([1, 2, 3], fn x -> x > 1 end)  # => 2
+find([1, 2, 3], fn x -> x > 5 end)  # => nil
+```
+
+---
+
+## SOLUTION: find
+
+```elixir
+def find(list, fun) do
+  reduce(list, nil, fn x, acc ->
+    if acc == nil and fun.(x), do: x, else: acc
+  end)
+end
+```
+
+---
+
+## Bonus: frequencies/1
+
+Count occurrences of each element. Returns a map.
+
+```elixir
+frequencies([:a, :b, :a, :c, :b, :a])
+# => %{a: 3, b: 2, c: 1}
+```
+
+HINT: `Map.update(map, key, 1, fn count -> count + 1 end)`
+
+---
+
+## SOLUTION: frequencies
+
+```elixir
+def frequencies(list) do
+  reduce(list, %{}, fn x, acc ->
+    Map.update(acc, x, 1, fn count -> count + 1 end)
+  end)
+end
+```
+
+---
+
+## Bonus: flat_map/2
+
+Map then flatten one level.
+
+```elixir
+flat_map([1, 2, 3], fn x -> [x, x * 10] end)
+# => [1, 10, 2, 20, 3, 30]
+```
+
+---
+
+## SOLUTION: flat_map
+
+```elixir
+def flat_map(list, fun) do
+  reduce(list, [], fn x, acc -> acc ++ fun.(x) end)
+end
+```
+
+---
+
+## Bonus: join/2
+
+Join a list of strings with a separator.
+
+```elixir
+join(["a", "b", "c"], "-")  # => "a-b-c"
+join([], "-")                # => ""
+```
+
+---
+
+## SOLUTION: join
+
+```elixir
+def join([], _sep), do: ""
+def join([first | rest], sep) do
+  reduce(rest, first, fn x, acc -> acc <> sep <> x end)
+end
+```
+
+---
+
+## Bonus: chunk_every/2
+
+Split a list into chunks of size n.
+
+```elixir
+chunk_every([1, 2, 3, 4, 5], 2)  # => [[1, 2], [3, 4], [5]]
+```
+
+HINT: Use a `{current_chunk, all_chunks}` accumulator.
+
+---
+
+## SOLUTION: chunk_every
+
+```elixir
+def chunk_every([], _n), do: []
+def chunk_every(list, n) do
+  {chunk, chunks} =
+    reduce(list, {[], []}, fn x, {current, all} ->
+      current = current ++ [x]
+      if length(current) == n do
+        {[], all ++ [current]}
+      else
+        {current, all}
+      end
+    end)
+
+  if chunk == [], do: chunks, else: chunks ++ [chunk]
+end
+```

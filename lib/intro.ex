@@ -196,4 +196,73 @@ defmodule Intro do
   #
   #   merge_sort([])                        => []
   #   merge_sort([8, 2, 5, 3, 1, 9, 0, 6]) => [0, 1, 2, 3, 5, 6, 8, 9]
+
+  # Bonus: all?/2
+  # Check if all elements satisfy a predicate. Build it using reduce!
+  # HINT: The accumulator is a boolean, starting as true.
+  # HINT: If any element fails the predicate, the result is false.
+  #
+  #   all?([2, 4, 6], fn x -> rem(x, 2) == 0 end) => true
+  #   all?([2, 3, 6], fn x -> rem(x, 2) == 0 end) => false
+  #   all?([], fn _ -> false end)                   => true
+
+  # Bonus: any?/2
+  # Check if any element satisfies a predicate. Build it using reduce!
+  # HINT: The accumulator is a boolean, starting as false.
+  # HINT: If any element passes the predicate, the result is true.
+  #
+  #   any?([1, 3, 5], fn x -> rem(x, 2) == 0 end) => false
+  #   any?([1, 2, 5], fn x -> rem(x, 2) == 0 end) => true
+  #   any?([], fn _ -> true end)                    => false
+
+  # Bonus: reject/2
+  # The opposite of filter — keep elements where the function returns false.
+  # HINT: Build it using reduce, or just call filter with a flipped predicate.
+  #
+  #   reject([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) => [1, 3]
+
+  # Bonus: find/2
+  # Return the first element matching a predicate, or nil if none match.
+  # HINT: Build it using reduce!
+  # HINT: The accumulator starts as nil and gets replaced when a match is found.
+  # HINT: Only replace the accumulator if it's still nil.
+  #
+  #   find([1, 2, 3], fn x -> x > 1 end) => 2
+  #   find([1, 2, 3], fn x -> x > 5 end) => nil
+
+  # Bonus: frequencies/1
+  # Count how many times each element appears. Returns a map.
+  # HINT: Build it using reduce! The accumulator is a map: %{}
+  # HINT: Use Map.update/4 to increment counts:
+  #       Map.update(map, key, 1, fn count -> count + 1 end)
+  #
+  #   frequencies([:a, :b, :a, :c, :b, :a]) => %{a: 3, b: 2, c: 1}
+
+  # Bonus: flat_map/2
+  # Map a function over a list, then flatten one level.
+  # HINT: Build it using reduce!
+  # HINT: The function returns a list for each element. Concatenate with ++.
+  #
+  #   flat_map([1, 2, 3], fn x -> [x, x * 10] end) => [1, 10, 2, 20, 3, 30]
+
+  # Bonus: join/2
+  # Join a list of strings with a separator.
+  # HINT: Build it using reduce!
+  # HINT: Use the <> operator to concatenate strings.
+  # HINT: The tricky part is not adding the separator before the first element.
+  #       Consider using the first element as the initial accumulator.
+  #
+  #   join(["a", "b", "c"], "-") => "a-b-c"
+  #   join(["hello"], "-")       => "hello"
+  #   join([], "-")              => ""
+
+  # Bonus: chunk_every/2
+  # Split a list into chunks of size n.
+  # HINT: Build it using reduce!
+  # HINT: The accumulator can be a tuple: {current_chunk, all_chunks}
+  # HINT: When the current chunk reaches size n, move it to all_chunks.
+  # HINT: Don't forget to add the final chunk if it's not empty.
+  #
+  #   chunk_every([1, 2, 3, 4, 5], 2) => [[1, 2], [3, 4], [5]]
+  #   chunk_every([1, 2, 3, 4], 2)     => [[1, 2], [3, 4]]
 end

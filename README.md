@@ -60,11 +60,19 @@ You should see 2 tests passing. The remaining exercises are commented out in
 ### Bonus
 
 - **merge_sort/1** — Sort a list using divide and conquer
+- **all?/2** — Check if all elements satisfy a predicate
+- **any?/2** — Check if any element satisfies a predicate
+- **reject/2** — Opposite of filter
+- **find/2** — Find the first matching element
+- **frequencies/1** — Count occurrences of each element
+- **flat_map/2** — Map then flatten
+- **join/2** — Join strings with a separator
+- **chunk_every/2** — Split a list into chunks of size n
 
 ## Viewing Slides
 
 ```bash
-npx @marp-team/marp-cli -s slides.md
+npx @marp-team/marp-cli -s -I .
 ```
 
 This opens a browser with the presentation slides.

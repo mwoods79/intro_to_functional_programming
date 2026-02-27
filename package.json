@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "slides": "marp -s slides.md",
+    "slides": "marp -s -I .",
     "slides:build": "marp slides.md -o slides.html"
   },
   "devDependencies": {

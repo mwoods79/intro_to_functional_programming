@@ -127,4 +127,48 @@ defmodule IntroTest do
   #   assert merge_sort([1]) == [1]
   #   assert merge_sort([8, 2, 5, 3, 5, 1, 9, 0, 6, 5]) == [0, 1, 2, 3, 5, 5, 5, 6, 8, 9]
   # end
+
+  # test "all?" do
+  #   assert all?([2, 4, 6], fn x -> rem(x, 2) == 0 end) == true
+  #   assert all?([2, 3, 6], fn x -> rem(x, 2) == 0 end) == false
+  #   assert all?([], fn _ -> false end) == true
+  # end
+
+  # test "any?" do
+  #   assert any?([1, 3, 5], fn x -> rem(x, 2) == 0 end) == false
+  #   assert any?([1, 2, 5], fn x -> rem(x, 2) == 0 end) == true
+  #   assert any?([], fn _ -> true end) == false
+  # end
+
+  # test "reject" do
+  #   assert reject([1, 2, 3, 4], fn x -> rem(x, 2) == 0 end) == [1, 3]
+  #   assert reject([1, 2, 3], fn _ -> false end) == [1, 2, 3]
+  # end
+
+  # test "find" do
+  #   assert find([1, 2, 3], fn x -> x > 1 end) == 2
+  #   assert find([1, 2, 3], fn x -> x > 5 end) == nil
+  # end
+
+  # test "frequencies" do
+  #   assert frequencies([:a, :b, :a, :c, :b, :a]) == %{a: 3, b: 2, c: 1}
+  #   assert frequencies([]) == %{}
+  # end
+
+  # test "flat_map" do
+  #   assert flat_map([1, 2, 3], fn x -> [x, x * 10] end) == [1, 10, 2, 20, 3, 30]
+  #   assert flat_map([], fn x -> [x] end) == []
+  # end
+
+  # test "join" do
+  #   assert join(["a", "b", "c"], "-") == "a-b-c"
+  #   assert join(["hello"], "-") == "hello"
+  #   assert join([], "-") == ""
+  # end
+
+  # test "chunk_every" do
+  #   assert chunk_every([1, 2, 3, 4, 5], 2) == [[1, 2], [3, 4], [5]]
+  #   assert chunk_every([1, 2, 3, 4], 2) == [[1, 2], [3, 4]]
+  #   assert chunk_every([], 3) == []
+  # end
 end
