@@ -20,8 +20,8 @@ paginate: true
 ## Getting set up
 
 ```bash
-$ git clone <repo-url>
-$ cd intro
+$ git clone https://github.com/mwoods79/intro_to_functional_programming.git
+$ cd intro_to_functional_programming
 $ mix test
 ```
 
